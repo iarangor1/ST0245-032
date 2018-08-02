@@ -20,9 +20,7 @@ class PuntosOpcionales {
             System.out.print(base + " ");
         } else {
             for (int i = 0; i < r; i++) {
-                //Para el ejercicio 3 quita el if
                 Punto3Aux(str, base + str.charAt(i), n-1, r);
-
             }
         }
     }

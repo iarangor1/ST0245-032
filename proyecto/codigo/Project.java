@@ -23,8 +23,9 @@ public class Project {
      * @see #closeBees()
      */
     public static void main (String[] args) throws FileNotFoundException {
+        long startTime=System.currentTimeMillis();
         try{
-            Scanner input = new Scanner(new File("coordenadas.txt"));
+            Scanner input = new Scanner(new File("10abejas.txt"));
             input.useDelimiter(",|\\n");
             while (input.hasNextLine()) {
                 if (input.hasNext()) {
@@ -39,6 +40,17 @@ public class Project {
         }catch(IOException e){
             System.out.println("Excepcion leyendo fichero: " + e);
         }
+
+        System.out.println();
+        int dataSize=1024*1024;
+        Runtime runtime = Runtime.getRuntime();
+        System.out.println("Memoria máxima: " + runtime.maxMemory()/dataSize + "MB");
+        System.out.println("Memoria total: " + runtime.totalMemory()/dataSize + "MB");
+        System.out.println("Memoria libre: " + runtime.freeMemory()/dataSize + "MB");
+        System.out.println("Memoria usada: " + (runtime.totalMemory() - runtime.freeMemory())/dataSize + "MB");
+
+        long endTime=System.currentTimeMillis()-startTime;
+        System.out.println("El tiempo de ejecución es: " + endTime);
     }
 
     /**
@@ -87,7 +99,7 @@ public class Project {
         double d = Math.sqrt(dh*dh + height*height);
         return d;
     }
-    
+
     /**
      * Mètodo que imprime las abejas que estan a 100 metros o menos y su respectiva distancia.
      * @see #Pitagoras(dh, height).
@@ -95,7 +107,7 @@ public class Project {
      */
     public static void closeBees (){
         for (int i = 0; i<bees.size()/3; i++){
-            for (int j = 0; j<bees.size()/3; j++) {
+            for (int j = i; j<bees.size()/3; j++) {
                 if(i!=j) {
                     double lat = latitude.get(i);
                     double lon = longitud.get(i);
@@ -112,4 +124,5 @@ public class Project {
             }
         }
     }
+
 }
